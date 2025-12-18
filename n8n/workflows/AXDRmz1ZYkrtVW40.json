@@ -1,0 +1,459 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent": {
+      "main": [
+        [
+          {
+            "node": "session.data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hash": {
+      "main": [
+        [
+          {
+            "node": "session.get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "call": {
+      "main": [
+        [
+          {
+            "node": "hash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parameters": {
+      "main": [
+        [
+          {
+            "node": "prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "session.data": {
+      "main": [
+        [
+          {
+            "node": "session.insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "session.exists": {
+      "main": [
+        [
+          {
+            "node": "session.get1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "session.get": {
+      "main": [
+        [
+          {
+            "node": "session.exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prompt": {
+      "main": [
+        [
+          {
+            "node": "Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T16:40:30.473Z",
+  "id": "AXDRmz1ZYkrtVW40",
+  "isArchived": false,
+  "meta": null,
+  "name": "oeils.query",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.user }}",
+        "options": {
+          "systemMessage": "={{ $json.system }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        192
+      ],
+      "id": "f65225cf-779e-4157-ad70-23deb89510a2",
+      "name": "Agent"
+    },
+    {
+      "parameters": {
+        "model": "mistral-medium",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        448,
+        416
+      ],
+      "id": "e2a5c927-f188-47a3-9d11-26fc2455747c",
+      "name": "Mistral Cloud Chat Model"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.hash }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        416
+      ],
+      "id": "87b94b43-9e3d-4def-ab04-53b6c5691e24",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "m7aRI0U7lEiGW0EH"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        192
+      ],
+      "id": "ed155932-aa4f-4c3a-a799-1f70ea6c2ac1",
+      "name": "session.insert"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8f4ca658-186a-464f-ac0e-16f4843e393d",
+              "name": "hash",
+              "value": "={{ ($json.prompt.toJsonString() + $json.context.toJsonString()).hash('sha256') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        96
+      ],
+      "id": "9a0ebe20-2edb-4859-9b09-b778d382e924",
+      "name": "hash"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "context",
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -896,
+        96
+      ],
+      "id": "87fe9650-62db-4bfe-8fd0-d81a4ae5cb79",
+      "name": "call"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a5e2e96c-51b9-4f1a-8f43-0dd0b4c8edf3",
+              "name": "hash",
+              "value": "={{ $('hash').item.json.hash }}",
+              "type": "string"
+            },
+            {
+              "id": "c6c48ecf-4d12-4b0e-9b87-446c66f48004",
+              "name": "context",
+              "value": "={{ $('call').item.json.context }}",
+              "type": "object"
+            },
+            {
+              "id": "a640f59b-e889-4e00-837a-565a62198be9",
+              "name": "prompt",
+              "value": "={{ $('call').item.json.prompt }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        192
+      ],
+      "id": "fb505df4-3e14-427a-89af-b131d968225c",
+      "name": "parameters"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "213efbee-7491-45ed-98b2-2b350f893e3c",
+              "name": "input",
+              "value": "={{ $('parameters').all().toJsonString() }}",
+              "type": "string"
+            },
+            {
+              "id": "3491cc7a-d157-4a52-8cfe-256537c4b1e0",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "770b0223-7e6f-41ff-b1a0-35b705d9c17b",
+              "name": "hash",
+              "value": "={{ $('hash').item.json.hash }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        784,
+        192
+      ],
+      "id": "ed413a5d-d924-4f26-a629-f22fb7a1720b",
+      "name": "session.data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0df9a6bc-7640-48f5-bc3e-e7bc9ece03ce",
+              "leftValue": "={{ $json }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        96
+      ],
+      "id": "a84b74e4-65a3-41a9-88d3-e0ae99022e30",
+      "name": "session.exists"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "m7aRI0U7lEiGW0EH",
+          "mode": "id"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "=hash",
+              "keyValue": "={{ $json.hash }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        96
+      ],
+      "id": "ad2ef202-f7b8-4eb1-bbd2-6e816a32188a",
+      "name": "session.get",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "m7aRI0U7lEiGW0EH",
+          "mode": "id"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "=hash",
+              "keyValue": "={{ $json.hash }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2d7deab8-bf79-4018-a8c3-aa232f0816f9",
+      "name": "session.get1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3494b2a4-0139-4181-9ed3-b5a1799c0c58",
+              "name": "system",
+              "value": "=## Contexte\n\n```json\n{{ $json.context.toJsonString() }}\n```",
+              "type": "string"
+            },
+            {
+              "id": "cce5f2e5-3bed-4f7c-8634-13164e2379fc",
+              "name": "user",
+              "value": "=## Instructions\n\n{{ $json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "9d9ccc86-78db-4128-8308-293d70ee11b4",
+              "name": "hash",
+              "value": "={{ $json.hash }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        192
+      ],
+      "id": "25a65b8a-8ce8-4c9b-af79-7d3c2af96885",
+      "name": "prompt"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T16:40:30.478Z",
+      "createdAt": "2025-12-18T16:40:30.478Z",
+      "role": "workflow:owner",
+      "workflowId": "AXDRmz1ZYkrtVW40",
+      "projectId": "niLAo7NIqUtCNw5d"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T16:40:33.150Z",
+  "versionId": "005df72e-ce8a-413f-bd74-9c279e2a740b"
+}
