@@ -6,9 +6,9 @@ services:
     image: baserow/baserow:2.0.5
     labels:
       caddy: oeils-baserow.constructions-incongrues.net
-      caddy.reverse_proxy: "{{upstreams 443}}"
+      caddy.reverse_proxy: "{{upstreams 80}}"
     environment:
-      BASEROW_PUBLIC_URL: 'http://oeils-baserow.constructions-incongrues.net'
+      BASEROW_PUBLIC_URL: 'https://oeils-baserow.constructions-incongrues.net'
     volumes:
       - baserow_data:/baserow/data
     networks:
