@@ -35,7 +35,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "easywatch-render",
+        "path": "render",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -92,6 +92,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-18T16:38:24.261Z",
-  "versionId": "2b94baf6-48ad-49e8-a22d-11c9816bdbf6"
+  "updatedAt": "2025-12-18T16:59:32.382Z",
+  "versionId": "abee4413-3f6d-40c2-b737-4e011bd13252"
 }
