@@ -1,0 +1,331 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Get a row": {
+      "main": [
+        [
+          {
+            "node": "Get a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Get a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Create a file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a row1": {
+      "main": [
+        [
+          {
+            "node": "Get a row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a row2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T16:35:22.742Z",
+  "id": "O9n1SHhHBBDiwmi3",
+  "isArchived": false,
+  "meta": null,
+  "name": "oeils.publish",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757531,
+        "rowId": "={{ $json.jobId }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "36209bb0-f4ca-480a-b1f8-6157a29abb42",
+      "name": "Get a row"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $json.repository_owner }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $json.repository_name }}",
+          "mode": "name"
+        },
+        "filePath": "=docs/executions/execution-{{ $('Edit Fields').item.json.execution }}.json",
+        "fileContent": "={{ $json.json.toJsonString() }}",
+        "commitMessage": "=jobId={{ $('Edit Fields').item.json.jobId }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1296,
+        0
+      ],
+      "id": "7d84bf2e-345f-4762-bc97-02f8ada5c7e2",
+      "name": "Create a file",
+      "webhookId": "92f0689f-862c-499e-a290-75ae70b025f2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "523dc178-faa1-485a-966e-3cc82d2fd422",
+              "name": "year",
+              "value": "={{ $now.extract('year') }}",
+              "type": "string"
+            },
+            {
+              "id": "a8e246d5-8dd8-49f5-b237-ec1f1badd108",
+              "name": "execution",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "998d36aa-aaed-4d4b-b816-89547a54f898",
+              "name": "jobId",
+              "value": "={{ $json.query.jobId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "c2ed3569-8ba0-478b-8ca6-c518b940776e",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "path": "easywatch-publish",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e3201c31-aa0a-4a84-9b4a-7d8431e954f6",
+      "name": "Webhook",
+      "webhookId": "2fcceddc-f0fc-4567-ac7c-1fec390f3e66"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "constructions-incongrues",
+          "mode": "list",
+          "cachedResultName": "constructions-incongrues",
+          "cachedResultUrl": "https://github.com/constructions-incongrues"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "jomayeux",
+          "mode": "name"
+        },
+        "filePath": "=episodes/execution-{{ $execution.id }}.md",
+        "fileContent": "=---\ndraft: true\ndate: {{ $now.format('yyyy-MM-dd HH:mm:ss') }}\nimage: {{ $('Edit Fields1').item.json.json.newsletter.cover_image || ''}}\n---\n{{ $('Edit Fields1').item.json.json.newsletter.markdown }}",
+        "commitMessage": "=jobId={{ $('Edit Fields').item.json.jobId }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1504,
+        0
+      ],
+      "id": "ce810423-018b-433f-858a-3f3f8d1ce637",
+      "name": "Create a file1",
+      "webhookId": "ebee90ae-5676-4a09-b259-65ed31d68c4e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c14f145-90eb-4f2a-b5f1-33c03a16e6df",
+              "name": "json",
+              "value": "={{ $('Get a row').item.json.Response.replace('```json', '').replace('```', '').trim() }}",
+              "type": "object"
+            },
+            {
+              "id": "228fd20c-3204-4a77-9a1c-2e0ad939c31d",
+              "name": "repository_owner",
+              "value": "={{ $json.Repository.extractUrlPath().trimStart().substring(1).split('/')[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "ca081ce5-beb7-481c-909e-fc11a93c1233",
+              "name": "repository_name",
+              "value": "={{ $json.Repository.extractUrlPath().trimStart().substring(1).split('/')[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1072,
+        0
+      ],
+      "id": "40f74b8d-5673-4742-95a4-65a98b69d4ca",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757413,
+        "rowId": "={{ $json.Task[0].id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        656,
+        0
+      ],
+      "id": "ccbc3173-1f36-4887-af12-e613c9639833",
+      "name": "Get a row1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 776437,
+        "rowId": "={{ $json.Publishers[0].id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        864,
+        0
+      ],
+      "id": "d8dabe4e-f1c1-44f8-9f0e-f982efb3339d",
+      "name": "Get a row2"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $json.repository_owner }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $json.repository_name }}",
+          "mode": "name"
+        },
+        "filePath": "=docs/executions/latest.json",
+        "fileContent": "={{ $json.json.toJsonString() }}",
+        "commitMessage": "=jobId={{ $('Edit Fields').item.json.jobId }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1296,
+        176
+      ],
+      "id": "ad31c7bc-ed52-49de-bbb9-3233ac312ad6",
+      "name": "Edit a file",
+      "webhookId": "92f0689f-862c-499e-a290-75ae70b025f2"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T16:35:22.747Z",
+      "createdAt": "2025-12-18T16:35:22.747Z",
+      "role": "workflow:owner",
+      "workflowId": "O9n1SHhHBBDiwmi3",
+      "projectId": "niLAo7NIqUtCNw5d"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T16:35:22.742Z",
+  "versionId": "4dac7ed7-11f6-46ac-a5b4-dc6338c5814c"
+}
