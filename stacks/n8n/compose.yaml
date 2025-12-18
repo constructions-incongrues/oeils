@@ -3,10 +3,8 @@ services:
     image: docker.n8n.io/n8nio/n8n
     restart: always
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.oeils-n8n.rule=Host(`${SUBDOMAIN}.${DOMAIN_NAME}`)
-      - traefik.http.routers.oeils-n8n.entrypoints=web,websecure
-      - traefik.http.services.n8n.loadbalancer.server.port=5678
+      caddy: oeils-n8n.constructions-incongrues.net
+      caddy.reverse_proxy: "{{upstreams 5678}}"
     environment:
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
       - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
@@ -22,11 +20,13 @@ services:
       - n8n_data:/home/node/.n8n
       - ./local-files:/files
     networks:
-      - saltbox
+      - caddy
+      - default
+
 
 volumes:
   n8n_data:
 
 networks:
-  saltbox:
+  caddy:
     external: true
