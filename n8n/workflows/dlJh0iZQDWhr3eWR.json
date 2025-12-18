@@ -663,7 +663,7 @@
     },
     {
       "parameters": {
-        "path": "easywatch-baserow",
+        "path": "baserow",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -1069,6 +1069,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-18T16:39:15.202Z",
-  "versionId": "97ade3d3-33be-4c34-b235-256bb5e26d44"
+  "updatedAt": "2025-12-18T16:59:08.577Z",
+  "versionId": "2b8ae000-2802-4a70-aec8-ba09e177fde1"
 }
