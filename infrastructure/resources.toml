@@ -7,7 +7,7 @@ links = [
   "https://oeils-n8n.constructions-incongrues.net"
 ]
 poll_for_updates = true
-linked_repo = "pantagruweb-main"
+linked_repo = "oeils-main"
 run_directory = "stacks/n8n"
 environment = """
 GENERIC_TIMEZONE=Europe/Paris

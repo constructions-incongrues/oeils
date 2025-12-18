@@ -2,7 +2,7 @@
 name = "oeils-n8n"
 tags = ["oeils"]
 [stack.config]
-server = "gabelle"
+server = "cartons"
 links = [
   "https://oeils-n8n.constructions-incongrues.net",
 ]
