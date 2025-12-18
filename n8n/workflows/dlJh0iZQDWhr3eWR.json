@@ -1,0 +1,1074 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Stack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "input": {
+      "main": [
+        [
+          {
+            "node": "Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "query": {
+      "main": [
+        [
+          {
+            "node": "Call 'easywatch.query'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'easywatch.query'": {
+      "main": [
+        [
+          {
+            "node": "Result.Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job": {
+      "main": [
+        [
+          {
+            "node": "Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Result": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stack": {
+      "main": [
+        [
+          {
+            "node": "Common",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Community",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Community": {
+      "main": [
+        [
+          {
+            "node": "Common",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Company",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Company": {
+      "main": [
+        [
+          {
+            "node": "Common",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Common": {
+      "main": [
+        [
+          {
+            "node": "Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T16:39:15.202Z",
+  "id": "dlJh0iZQDWhr3eWR",
+  "isArchived": false,
+  "meta": null,
+  "name": "oeils.baserow",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Job').item.json.Stack }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "array",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "6e3f1d4e-ebd1-4032-b929-43e34ab0269d"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "stack"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "273fc492-c3c1-4eaf-9a07-4bb06f9c4b1a",
+                    "leftValue": "={{ $('Job').item.json.Company }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "array",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "company"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8065c136-4a72-469a-9079-ffb6f05dc5a5",
+                    "leftValue": "={{ $('Job').item.json.Community }}",
+                    "rightValue": "community",
+                    "operator": {
+                      "type": "array",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "community"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -224,
+        256
+      ],
+      "id": "61ed1d34-59ee-4351-bbbe-fc5f9eaad9b2",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2c691a2a-b41b-48d0-9d28-37e478de7abd",
+              "name": "feeds",
+              "value": "={{ $json['Stack Feeds'].map(f => { return f.value }) }}",
+              "type": "array"
+            },
+            {
+              "id": "18f16480-7bc9-4fd9-9b1c-e79d56c121f6",
+              "name": "subject",
+              "value": "={{ $('Job').item.json.Stack[0] }}",
+              "type": "object"
+            },
+            {
+              "id": "72c78822-000d-442f-afb8-55296979ec2a",
+              "name": "job.id",
+              "value": "={{ $('Job').item.json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "120f707e-8f05-4b70-9f42-501dd4b79ba7",
+              "name": "template.id",
+              "value": "={{ $('Job').item.json.Template[0].id }}",
+              "type": "number"
+            },
+            {
+              "id": "bbc0d5e0-f06f-4cf9-8858-4f44ec7340b9",
+              "name": "target.type",
+              "value": "Stack",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f83f0a64-4d02-41f3-b414-4f26391fbc04",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f3c5d340-8c1f-49bb-85cd-7ecabdb87821",
+              "name": "job.id",
+              "value": "={{ $('Job').item.json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "09aa1781-a6e9-4892-8f9b-5892d22c3a3c",
+              "name": "template.id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "5938e321-c531-443a-b994-03e17790b462",
+              "name": "template.text",
+              "value": "={{ $('Prompt').item.json.Text }}",
+              "type": "string"
+            },
+            {
+              "id": "ccb93d2b-034e-4cd1-bb7f-288f8363f452",
+              "name": "context.subject",
+              "value": "={{ $('Common').item.json.subject }}",
+              "type": "object"
+            },
+            {
+              "id": "c4a276f5-ff1d-4fad-9c89-034354d8abc3",
+              "name": "context.company",
+              "value": "={{ $('Common').item.json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "cdc84672-e99a-4526-9c53-d78e1d4f312a",
+              "name": "context.subject.technologies",
+              "value": "={{ $('Common').item.json.technologies }}",
+              "type": "array"
+            },
+            {
+              "id": "43905820-0aa0-4339-9063-e4ae9ed8d285",
+              "name": "context.feeds",
+              "value": "={{ $('Common').item.json.feeds }}",
+              "type": "array"
+            },
+            {
+              "id": "fd8bdbf3-b95e-4a63-a0b0-f3dae49d9a7b",
+              "name": "context.subject.type",
+              "value": "={{ $json.Target.value }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        192
+      ],
+      "id": "836fb023-5851-48f2-aea5-6bddef8fda14",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f2e1570-0e60-42f1-8c16-d9d369f9ed58",
+              "name": "id",
+              "value": "={{ $json.query.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1328,
+        288
+      ],
+      "id": "d69f6e69-652d-4c81-ad6f-3c2629f7c75a",
+      "name": "input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0ab45bf6-2b35-4c4d-934b-76438ed4cdde",
+              "name": "prompt",
+              "value": "={{ $('Prompt').item.json.Text }}",
+              "type": "string"
+            },
+            {
+              "id": "41ecef20-3f17-49c2-9722-c01604672121",
+              "name": "context",
+              "value": "={{ $('Edit Fields1').item.json.context }}",
+              "type": "object"
+            },
+            {
+              "id": "52f2c455-c618-4879-b408-fb2388e2299f",
+              "name": "context.links",
+              "value": "={{ $json.links }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2208,
+        192
+      ],
+      "id": "d47ed895-0f18-4b97-ba6c-3964d4751c0d",
+      "name": "query"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Y9wI8cmFtcWWaxSZ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Y9wI8cmFtcWWaxSZ",
+          "cachedResultName": "easywatch.query"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "prompt": "={{ $json.prompt }}",
+            "context": "={{ $json.context }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "prompt",
+              "displayName": "prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "context",
+              "displayName": "context",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2432,
+        192
+      ],
+      "id": "7fb91d57-b11e-45eb-9838-08fd8dbd71d1",
+      "name": "Call 'easywatch.query'"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "databaseId": 329770,
+        "tableId": 757531,
+        "rowId": "={{ $('Result').item.json.id }}",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 6408748,
+              "fieldValue": "Running"
+            },
+            {
+              "fieldId": 6409012,
+              "fieldValue": "=https://n8n-kreate.it.klanik.com/workflow/{{ $workflow.id }}/executions/{{ $execution.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        288
+      ],
+      "id": "3bd3b75e-fe5c-4503-9545-f57802c5c62e",
+      "name": "Status"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "databaseId": 329770,
+        "tableId": 757531,
+        "rowId": "={{ $('Result').item.json.id }}",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 6408901,
+              "fieldValue": "={{ $now.toString() }}"
+            },
+            {
+              "fieldId": 6408748,
+              "fieldValue": "Complete"
+            },
+            {
+              "fieldId": 6408903,
+              "fieldValue": "={{ $json.output }}"
+            },
+            {
+              "fieldId": 6408904,
+              "fieldValue": "={{ $json.input }}"
+            },
+            {
+              "fieldId": 6410658,
+              "fieldValue": "={{ $('Common').item.json.subject.name }}"
+            },
+            {
+              "fieldId": 6410762,
+              "fieldValue": "={{ $('Common').item.json.company }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        192
+      ],
+      "id": "af64ca8d-0b21-4a0b-abb3-f137718b17ce",
+      "name": "Result.Complete"
+    },
+    {
+      "parameters": {
+        "path": "easywatch-baserow",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1552,
+        288
+      ],
+      "id": "386bb869-60d3-4519-91ed-23e81e2b8e2a",
+      "name": "Webhook",
+      "webhookId": "7a340847-75ce-446a-8209-da52d8d95d7e"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757413,
+        "rowId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        288
+      ],
+      "id": "a0e76d7d-7553-4d90-a2cf-4ee59764e788",
+      "name": "Job"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "databaseId": 329770,
+        "tableId": 757531,
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 6408746,
+              "fieldValue": "={{ $json.id }}"
+            },
+            {
+              "fieldId": 6408748,
+              "fieldValue": "Running"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        288
+      ],
+      "id": "081db445-61b5-4d0b-b9a1-32303bfb4cc9",
+      "name": "Result"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757369,
+        "rowId": "={{ $json.subject.id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "cc5e661d-ddca-4317-aa5c-f34330600475",
+      "name": "Stack"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2c691a2a-b41b-48d0-9d28-37e478de7abd",
+              "name": "feeds",
+              "value": "={{ $('Job').item.json['Community Feeds'].map(f => { return f.value }) }}",
+              "type": "array"
+            },
+            {
+              "id": "18f16480-7bc9-4fd9-9b1c-e79d56c121f6",
+              "name": "subject",
+              "value": "={{ $('Job').item.json.Community[0] }}",
+              "type": "object"
+            },
+            {
+              "id": "72c78822-000d-442f-afb8-55296979ec2a",
+              "name": "job.id",
+              "value": "={{ $('Job').item.json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "120f707e-8f05-4b70-9f42-501dd4b79ba7",
+              "name": "template.id",
+              "value": "={{ $('Job').item.json.Template[0].id }}",
+              "type": "number"
+            },
+            {
+              "id": "bbc0d5e0-f06f-4cf9-8858-4f44ec7340b9",
+              "name": "subject.type",
+              "value": "Community",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        576
+      ],
+      "id": "885adb4a-60de-42c6-8ba4-0294c9c2db7f",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757661,
+        "rowId": "={{ $json.subject.id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        224,
+        576
+      ],
+      "id": "35edb039-fd4a-4ddb-9322-9a38026a6804",
+      "name": "Community"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2c691a2a-b41b-48d0-9d28-37e478de7abd",
+              "name": "feeds",
+              "value": "={{ $json['Community Feeds'].map(f => { return f.value }) }}",
+              "type": "array"
+            },
+            {
+              "id": "18f16480-7bc9-4fd9-9b1c-e79d56c121f6",
+              "name": "subject",
+              "value": "={{ $('Job').item.json.Company[0] }}",
+              "type": "object"
+            },
+            {
+              "id": "72c78822-000d-442f-afb8-55296979ec2a",
+              "name": "job.id",
+              "value": "={{ $('Job').item.json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "120f707e-8f05-4b70-9f42-501dd4b79ba7",
+              "name": "template.id",
+              "value": "={{ $('Job').item.json.Template[0].id }}",
+              "type": "number"
+            },
+            {
+              "id": "bbc0d5e0-f06f-4cf9-8858-4f44ec7340b9",
+              "name": "subject.type",
+              "value": "Company",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        192
+      ],
+      "id": "9d5374c5-4e1a-43d7-b16a-2a602c3719b8",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757368,
+        "rowId": "={{ $json.subject.id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        224,
+        192
+      ],
+      "id": "2e518e7c-3276-4db5-b651-addb25737fb7",
+      "name": "Company"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "databaseId": 329770,
+        "tableId": 757531,
+        "rowId": "={{ $('Result').item.json.id }}",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 6408748,
+              "fieldValue": "Failed"
+            },
+            {
+              "fieldId": 6409192,
+              "fieldValue": "Unrecognized target type (Stack / Company)"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        0,
+        384
+      ],
+      "id": "e732f4c2-5b43-4c27-8edd-79ae9f0726c7",
+      "name": "Error"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f799824-1e91-40ab-b51a-79902024feba",
+              "name": "company",
+              "value": "={{ $json.Company[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "f54bea73-74bc-4936-9853-40f937a63354",
+              "name": "technologies",
+              "value": "={{ $json.Technologies ? $json.Technologies.map(item => { return item.value })  : []}}",
+              "type": "array"
+            },
+            {
+              "id": "7e5c987f-979e-4a82-baec-ae16abde67c4",
+              "name": "feeds",
+              "value": "={{ $json.Feeds.map(f => { return f.value }) }}",
+              "type": "array"
+            },
+            {
+              "id": "e38311d5-1cfa-497a-bd4a-e657d7e2567c",
+              "name": "subject.name",
+              "value": "={{ $json.Nom }}",
+              "type": "string"
+            },
+            {
+              "id": "3719ab69-ddd7-4daa-aebb-6bb360b7650a",
+              "name": "subject.members",
+              "value": "={{ $json.Persons.map(item => { return item.value }) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        192
+      ],
+      "id": "20123b59-e3d6-47ee-ba85-d00ad3665634",
+      "name": "Common"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.feed }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        192
+      ],
+      "id": "589a7b95-1087-448d-8969-3c2d702568e0",
+      "name": "RSS Read",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "context.feeds",
+        "options": {
+          "destinationFieldName": "feed"
+        }
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        192
+      ],
+      "id": "5778ec32-e253-42d7-a321-5ac6ee7ec93a",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "links",
+        "include": "specifiedFields",
+        "fieldsToInclude": "link, pubDate, contentSnippet, categories",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1904,
+        192
+      ],
+      "id": "43820d44-9e51-47a1-88ba-5c7c95961d01",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "maxItems": 500,
+        "keep": "lastItems"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        192
+      ],
+      "id": "b47d577d-0b55-4a34-a6a7-eb3844cc25ba",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "respondWith": "redirect",
+        "redirectURL": "=https://easywatch.baserow.site/tasks/jobs?jobId={{ $json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -672,
+        288
+      ],
+      "id": "79de8f56-2a82-49bf-aeb0-d3be71dee6a6",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 329770,
+        "tableId": 757406,
+        "rowId": "={{ $('Job').item.json.Prompt[0].id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        672,
+        192
+      ],
+      "id": "79cdf75e-2521-4125-b057-53bc0d9066ae",
+      "name": "Prompt"
+    }
+  ],
+  "pinData": {
+    "Edit Fields2": [
+      {
+        "json": {
+          "feeds": [
+            "https://bg.raindrop.io/rss/public/40191452"
+          ],
+          "subject": {
+            "id": 1,
+            "value": "Practice Devops & Cloud",
+            "order": "1.00000000000000000000",
+            "type": "Community"
+          },
+          "job": {
+            "id": 34
+          },
+          "template": {
+            "id": 7
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T16:39:15.204Z",
+      "createdAt": "2025-12-18T16:39:15.204Z",
+      "role": "workflow:owner",
+      "workflowId": "dlJh0iZQDWhr3eWR",
+      "projectId": "niLAo7NIqUtCNw5d"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T16:39:15.202Z",
+  "versionId": "97ade3d3-33be-4c34-b235-256bb5e26d44"
+}
