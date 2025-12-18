@@ -1,0 +1,793 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "categories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "categories": {
+      "main": [
+        [
+          {
+            "node": "categories.form.json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "categories.form.json": {
+      "main": [
+        [
+          {
+            "node": "categories.form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "categories.form": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "feed.filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "links.form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "feed.filter": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "links.render",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "links.form": {
+      "main": [
+        [
+          {
+            "node": "agents.data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "links.render": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "query.parameters": {
+      "main": [
+        [
+          {
+            "node": "easywatch.query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "easywatch.query": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent.form": {
+      "main": [
+        [
+          {
+            "node": "agent.data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent.data": {
+      "main": [
+        [
+          {
+            "node": "agent.mission.form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent.mission.form": {
+      "main": [
+        [
+          {
+            "node": "query.parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "form.feed": {
+      "main": [
+        [
+          {
+            "node": "feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agents.data": {
+      "main": [
+        [
+          {
+            "node": "Sort1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "agent.form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "feed": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T16:37:51.590Z",
+  "id": "WYHvO1PYUjAJBjCz",
+  "isArchived": false,
+  "meta": null,
+  "name": "oeils.feed",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        -176
+      ],
+      "id": "2882c67f-b181-4a84-a082-41ed654a91d9",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nlet categories = {};\nfor (const item of $input.all()) {\n  if (item.json.categories) {\n    item.json.categories.forEach(c => {\n      categories[c] == null ? categories[c] = 1 : categories[c] += 1;\n    })\n  }\n}\n\nreturn categories;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        848,
+        -176
+      ],
+      "id": "88991811-ee1a-49f9-a2e8-2ce10ae5090c",
+      "name": "categories"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "efb036bd-bc40-4bb7-b475-3ec63b7aeaf7",
+              "name": "categories",
+              "value": "={{ $json.keys().sort().map(c => {return {\"option\": c.trim() + \" (\"+ $json[c] +\")\"} }) }}",
+              "type": "array"
+            },
+            {
+              "id": "5d6bbb61-eb37-4c37-a695-a523d43ef53d",
+              "name": "",
+              "value": "={{ $json.keys() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1072,
+        -176
+      ],
+      "id": "3a0e3ded-bd9f-4258-8ae4-0ae0997d7324",
+      "name": "categories.form.json"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n  {\n    \"fieldLabel\": \"Feed URL\",\n    \"fieldType\": \"html\",\n    \"elementName\": \"div\",\n    \"html\": \"<label>Feed URL: </label> <a href=\\\"{{ $('feed').first().json.url }} \\\" target=\\\"_blank\\\">{{ $('feed').first().json.url }}</a>\"\n  },\n  {\n    \"fieldLabel\": \"Categories\",\n    \"fieldType\": \"dropdown\",\n    \"multiselect\": true,\n    \"fieldOptions\": {\n      \"values\": {{ $json.categories }}\n      \n    }\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1296,
+        -176
+      ],
+      "id": "df540a30-515b-4f29-93ed-fec27bd9877f",
+      "name": "categories.form",
+      "webhookId": "34e1182b-f764-4fe5-aa98-0840b5582813"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d42a479-8817-4669-b5d9-cabc7815eea1",
+              "name": "tags",
+              "value": "={{ $json.Categories.map(c => {return c.split('(')[0].trim()}) }}",
+              "type": "array"
+            },
+            {
+              "id": "14af5790-4291-4a8c-8ec9-c988b6659183",
+              "name": "links",
+              "value": "={{ $('RSS Read').all().map(i => {return i.json}) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1520,
+        -176
+      ],
+      "id": "cae88c9f-8fc1-49f8-9b0c-dbdc324a6dc5",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "links",
+        "include": "selectedOtherFields",
+        "fieldsToInclude": "tags",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1744,
+        -176
+      ],
+      "id": "bf1ec4ab-c311-4176-a95d-67911fd893f3",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "option",
+              "renameField": true,
+              "outputFieldName": "options"
+            },
+            {
+              "fieldToAggregate": "listItem",
+              "renameField": true,
+              "outputFieldName": "listItems"
+            },
+            {
+              "fieldToAggregate": "link",
+              "renameField": true,
+              "outputFieldName": "links"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        -176
+      ],
+      "id": "1b92fcc4-0f0b-4a5f-84c7-39b256c1bfa0",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n  {\n    \"fieldLabel\": \"Feed URL\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Feed URL: </label> <a href=\\\"{{ $('feed').first().json.url }} \\\" target=\\\"_blank\\\">{{ $('feed').first().json.url }}</a>\"\n  },\n  {\n    \"fieldLabel\": \"Categories\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Categories: </label> {{ $('Edit Fields').item.json.tags.join(\", \") }}\"\n  },\n  {\n    \"fieldLabel\": \"Links\",\n    \"fieldType\": \"html\",\n    \"html\":{{ ('<label>Links: </label> <ul>' + $json.listItems.join('') + '</ul>').toJsonString()}}\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        2864,
+        -176
+      ],
+      "id": "532f346a-26d5-4717-9de1-06e733c9dd73",
+      "name": "links.form",
+      "webhookId": "34e1182b-f764-4fe5-aa98-0840b5582813"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "de37b6c9-599b-42c0-a48a-6051d74ad563",
+              "leftValue": "={{ $json.tags }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b79d281e-c5ee-4254-acfd-bda24aaad3ea",
+              "leftValue": "={{ \n  $json.links.categories.map(c => { \n    return c.trim() \n  }).intersection(\n      $json.tags\n  ) \n}}",
+              "rightValue": "={{ $('Edit Fields').item.json.tags }}",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1968,
+        -176
+      ],
+      "id": "20ac1f99-7c0b-47e3-b812-3bfc8ee7df6f",
+      "name": "feed.filter"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "links.title"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2192,
+        -176
+      ],
+      "id": "1c5efef8-4c42-4ca5-9212-569c8e3f49a8",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "571af70a-926c-470e-a6a6-0fae9c3e01af",
+              "name": "option",
+              "value": "={{ {\"option\": $json.links.title.trim(' ', '\"\"')} }}",
+              "type": "object"
+            },
+            {
+              "id": "ff3761e5-e061-4c23-9039-c19285b2ab6f",
+              "name": "listItem",
+              "value": "=<li><a href=\"{{ $json.links.link }}\" target=\"_blank\">{{ $json.links.title.trim() }}</a></li>",
+              "type": "string"
+            },
+            {
+              "id": "1f77b799-dfc9-4ede-a9cb-767970478607",
+              "name": "link",
+              "value": "={{ $json.links.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2416,
+        -176
+      ],
+      "id": "84a126fb-8857-4d34-96ad-1965619f39b9",
+      "name": "links.render"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "EasyWatched !",
+        "completionMessage": "=<div>\n<a href=\"https://n8n-kreate.it.klanik.com/webhook/easywatch-editor?session={{ $json.id }}\" target=\"_blank\">Voir et éditer les résultats</a>\n</div>",
+        "limitWaitTime": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        4880,
+        -176
+      ],
+      "id": "3d17247e-1577-451e-b802-39173e55e6de",
+      "name": "Form",
+      "webhookId": "686f831b-0ef3-4688-aed4-d8324f03832a"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3cecc8cc-cc03-4631-928a-948f180bc4b8",
+              "name": "links",
+              "value": "={{ $('Aggregate').item.json.links }}",
+              "type": "array"
+            },
+            {
+              "id": "7eeb4936-5c8e-488a-a30d-d57ebd0d28d0",
+              "name": "agent.name",
+              "value": "={{ $('agent.data').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "ed6a2c77-55ac-4d64-932a-c817bf9dbdab",
+              "name": "agent.mission",
+              "value": "={{ $json['Agent Mission Custom'].trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "a5634dd7-2333-45f7-8e3c-af2f42e528e5",
+              "name": "tags",
+              "value": "={{  $('Edit Fields').item.json.tags }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4432,
+        -176
+      ],
+      "id": "fe6bccce-35d5-4709-a3a5-33f5fa0d30b7",
+      "name": "query.parameters"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Y9wI8cmFtcWWaxSZ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Y9wI8cmFtcWWaxSZ",
+          "cachedResultName": "easywatch.query"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "links": "={{ $json.links }}"
+          },
+          "matchingColumns": [
+            "links"
+          ],
+          "schema": [
+            {
+              "id": "links",
+              "displayName": "links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "array",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        4656,
+        -176
+      ],
+      "id": "4f522ea5-2bc2-46cc-8b25-f201498b8233",
+      "name": "easywatch.query"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n  {\n    \"fieldLabel\": \"Feed URL\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Feed URL: </label> <a href=\\\"{{ $('feed').first().json.url }} \\\" target=\\\"_blank\\\">{{ $('feed').first().json.url }}</a>\"\n  },\n  {\n    \"fieldLabel\": \"Categories\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Categories: </label> {{ $('Edit Fields').item.json.tags.join(\", \") }}\"\n  },\n  {\n    \"fieldLabel\": \"Links\",\n    \"fieldType\": \"html\",\n    \"html\":{{ ('<label>Links count: </label> ' + $('Aggregate').item.json.links.length ).toJsonString() }}\n  },\n  {\n    \"fieldType\": \"radio\",\n    \"fieldLabel\": \"Agent\",\n    \"fieldOptions\": {\n      \"values\": {{ $json.agents.map(a => { return {\"option\": a.name } }) }}\n    }\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        3760,
+        -176
+      ],
+      "id": "40acc9d5-1abb-4c51-8b04-568a22797845",
+      "name": "agent.form",
+      "webhookId": "34e1182b-f764-4fe5-aa98-0840b5582813"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "Q6wN3NNdLnjNYT8R",
+          "mode": "id"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "=name",
+              "condition": "=eq",
+              "keyValue": "={{ $json.Agent }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        3984,
+        -176
+      ],
+      "id": "5fa844ca-6b9f-483d-b02a-08da831eded6",
+      "name": "agent.data"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n  {\n    \"fieldLabel\": \"Feed URL\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Feed URL: </label> <a href=\\\"{{ $('feed').first().json.url }} \\\" target=\\\"_blank\\\">{{ $('feed').first().json.url }}</a>\"\n  },\n  {\n    \"fieldLabel\": \"Categories\",\n    \"fieldType\": \"html\",\n    \"html\": \"<label>Categories: </label> {{ $('Edit Fields').item.json.tags.join(\", \") }}\"\n  },\n  {\n    \"fieldLabel\": \"Links\",\n    \"fieldType\": \"html\",\n    \"html\":{{ ('<label>Links count: </label> ' + $('Aggregate').item.json.links.length ).toJsonString() }}\n  },\n  {\n    \"fieldType\": \"html\",\n    \"fieldLabel\": \"Agent\",\n    \"html\":{{ ('<label>Agent: </label> ' + $json.name ).toJsonString() }}\n  },\n  {\n    \"fieldType\": \"html\",\n    \"fieldLabel\": \"Agent Mission\",\n    \"html\": {{ ('<label>Agent Mission: </label> ' + '<p><cite>' + $json.mission + '</cite></p>').toJsonString() }}\n  },\n  {\n    \"fieldType\": \"textarea\",\n    \"fieldLabel\": \"Agent Mission Custom\"\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        4208,
+        -176
+      ],
+      "id": "f3bb3a92-4114-4559-9636-1e297e0df7de",
+      "name": "agent.mission.form",
+      "webhookId": "34e1182b-f764-4fe5-aa98-0840b5582813"
+    },
+    {
+      "parameters": {
+        "formTitle": "EasyWatch",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Feed URL",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "path": "easywatch-wizard"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        176,
+        -176
+      ],
+      "id": "f250c196-377b-4cd2-b0ee-2275c08d82bd",
+      "name": "form.feed",
+      "webhookId": "77c447da-cff7-4591-b4b3-ddf51781cb28"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "Q6wN3NNdLnjNYT8R",
+          "mode": "id"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        3088,
+        -176
+      ],
+      "id": "d794242b-0f66-4d29-886a-923290671532",
+      "name": "agents.data"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "agents",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3536,
+        -176
+      ],
+      "id": "8843b72b-aec9-46cc-a3ae-8818c60a6f29",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        3312,
+        -176
+      ],
+      "id": "2e766409-772f-4cc0-8c82-2eaca7c0f11d",
+      "name": "Sort1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "62700cbf-3027-460e-a3cf-f28553253570",
+              "name": "url",
+              "value": "={{ $json['Feed URL'] || $json.query.url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        -176
+      ],
+      "id": "f0e75aef-c5c4-486f-a3e2-0eda8e820622",
+      "name": "feed"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T16:37:51.596Z",
+      "createdAt": "2025-12-18T16:37:51.596Z",
+      "role": "workflow:owner",
+      "workflowId": "WYHvO1PYUjAJBjCz",
+      "projectId": "niLAo7NIqUtCNw5d"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T16:37:51.590Z",
+  "versionId": "3acab25f-78f2-45df-a993-953f489d171b"
+}
