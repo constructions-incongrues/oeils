@@ -1,4 +1,23 @@
 [[stack]]
+name = "oeils-baserow"
+tags = ["oeils"]
+[stack.config]
+server = "cartons"
+links = [
+  "https://oeils-baserow.constructions-incongrues.net"
+]
+poll_for_updates = true
+linked_repo = "oeils-main"
+run_directory = "stacks/baserow"
+environment = """
+GENERIC_TIMEZONE=Europe/Paris
+DOMAIN_NAME=constructions-incongrues.net
+SUBDOMAIN=oeils-baserow
+"""
+
+##
+
+[[stack]]
 name = "oeils-n8n"
 tags = ["oeils"]
 [stack.config]
