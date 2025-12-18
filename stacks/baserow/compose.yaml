@@ -13,7 +13,6 @@ services:
       - baserow_data:/baserow/data
     networks:
       - caddy
-      - default
 volumes:
   baserow_data:
 
