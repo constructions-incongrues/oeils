@@ -1,0 +1,16 @@
+[[stack]]
+name = "oeils-n8n"
+tags = ["oeils"]
+[stack.config]
+server = "gabelle"
+links = [
+  "https://oeils-n8n.constructions-incongrues.net",
+]
+poll_for_updates = true
+linked_repo = "oeils-main"
+run_directory = "stacks/n8n"
+environment = """
+GENERIC_TIMEZONE=Europe/Paris
+DOMAIN_NAME=constructions-incongrues.net
+SUBDOMAIN=oeils-n8n
+"""
