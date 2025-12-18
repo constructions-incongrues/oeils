@@ -1,0 +1,97 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-18T16:38:24.261Z",
+  "id": "Hi2UNIbo9TViMIW2",
+  "isArchived": false,
+  "meta": null,
+  "name": "oeils.render",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "easywatch-render",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "dc241d83-7b93-4d2e-947e-bf551ad4ec7f",
+      "name": "Webhook",
+      "webhookId": "e6b4c408-d045-4f23-a4e9-6104ad98f4c6"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "3051da6d-9b4c-4517-af03-97244680a241",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get template and data from webhook body\nconst template = $json.body.template;\nconst data = $json.body.data;\n\nlet rendered;\n\n// Simple string replacement (faster for basic cases)\nrendered = template.replace(/\\{\\{(\\w+)\\}\\}/g, (match, key) => {\n  return data[key] || match;\n})\n\nreturn [{\n  json: {\n    rendered: rendered,\n    templateLength: template.length,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dbdafe8c-0f75-47e6-b519-abf486f9a1c1",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-18T16:38:24.264Z",
+      "createdAt": "2025-12-18T16:38:24.264Z",
+      "role": "workflow:owner",
+      "workflowId": "Hi2UNIbo9TViMIW2",
+      "projectId": "niLAo7NIqUtCNw5d"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-18T16:38:24.261Z",
+  "versionId": "2b94baf6-48ad-49e8-a22d-11c9816bdbf6"
+}
