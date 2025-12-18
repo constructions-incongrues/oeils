@@ -1,16 +1,22 @@
-## Add your compose file here
+# This is the recommended way of running Baserow using docker-compose for most users.
+# See https://baserow.io/docs/installation%2Finstall-with-docker for more details.
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  baserow:
+    container_name: baserow
+    image: baserow/baserow:2.0.5
+    labels:
+      caddy: oeils-baserow.constructions-incongrues.net
+      caddy.reverse_proxy: "{{upstreams 80}}"
+    environment:
+      BASEROW_PUBLIC_URL: 'http://oeils-baserow.constructions-incongrues.net'
+    volumes:
+      - baserow_data:/baserow/data
+    networks:
+      - caddy
+      - default
+volumes:
+  baserow_data:
 
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+networks:
+  caddy:
+    external: true
