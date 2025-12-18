@@ -172,7 +172,7 @@
     },
     {
       "parameters": {
-        "path": "easywatch-publish",
+        "path": "publish",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -326,6 +326,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-18T16:35:22.742Z",
-  "versionId": "4dac7ed7-11f6-46ac-a5b4-dc6338c5814c"
+  "updatedAt": "2025-12-18T16:59:51.997Z",
+  "versionId": "cc17b772-a8cb-471b-813b-eaeb6150eaff"
 }
