@@ -17,6 +17,25 @@ SUBDOMAIN=oeils-n8n
 
 ##
 
+[[stack]]
+name = "oeils-n8n"
+tags = ["oeils"]
+[stack.config]
+server = "cartons"
+links = [
+  "https://oeils-n8n.constructions-incongrues.net"
+]
+poll_for_updates = true
+linked_repo = "oeils-main"
+run_directory = "stacks/n8n"
+environment = """
+GENERIC_TIMEZONE=Europe/Paris
+DOMAIN_NAME=constructions-incongrues.net
+SUBDOMAIN=oeils-n8n
+"""
+
+##
+
 [[resource_sync]]
 name = "oeils"
 tags = ["oeils"]
@@ -24,7 +43,7 @@ tags = ["oeils"]
 linked_repo = "oeils-main"
 resource_path = [
   "infrastructure/resources.toml",
-  "stacks"
+  "stacks/n8n"
 ]
 managed = true
 match_tags = ["oeils"]
